@@ -1,0 +1,58 @@
+[project]
+name = "pcdcnet"
+version = "1.0.0"
+description = "PCDCNet — physics-informed graph-recurrent station-level air-quality forecasting"
+readme = "README.md"
+authors = [{ name = "Shuo Wang" }]
+license = { file = "LICENSE" }
+requires-python = ">=3.11"
+dependencies = [
+    "numpy",
+    "pandas",
+    "xarray",
+    "h5netcdf",
+    "h5py",
+    "requests",
+]
+
+[project.optional-dependencies]
+cpu = ["torch>=2.7"]
+cu128 = ["torch>=2.7"]
+
+[dependency-groups]
+dev = ["pytest", "ruff"]
+
+[tool.uv]
+conflicts = [[{ extra = "cpu" }, { extra = "cu128" }]]
+
+[tool.uv.sources]
+torch = [
+    { index = "pytorch-cpu", extra = "cpu" },
+    { index = "pytorch-cu128", extra = "cu128" },
+]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true
+
+[project.urls]
+Repository = "https://github.com/shuowang-ai/PCDCNet"
+Dataset = "https://doi.org/10.5281/zenodo.15614907"
+Deployment = "https://caiyunapp.com/map/"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/pcdcnet"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
