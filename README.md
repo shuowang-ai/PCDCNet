@@ -112,8 +112,15 @@ uv run python scripts/predict.py \
 
 ## Repository scope
 
-* The repository is self-contained: model, losses, graph construction, data pipeline, training, evaluation, sample data and trained checkpoints.
-* Baseline/competitor implementations, the production serving stack and the historical experiment archives are not part of this release; the paper and its supplementary material document those evaluations and their caveats.
+This release provides basic training and inference for PCDCNet: the model, graph construction, data pipeline, training, evaluation and prediction scripts, a sample dataset and trained checkpoints for the emission-free configuration.
+
+It is not a re-creation of every experiment in the manuscript. The following are described in the paper and its supplementary material but are not part of this release:
+
+* the domain-informed constraint (DIC), the auxiliary regularizer on a learned spatial readout used in the manuscript's primary regional configuration — this release trains with the prediction loss only;
+* emission-informed configurations, which require separately licensed MEIC inventories (the `--emissions` option accepts user-prepared emission channels);
+* comparison-model implementations, historical experiment archives and the production serving stack.
+
+Scores obtained with this release therefore differ from the values reported in the manuscript's regional comparison table.
 
 ## Citation
 
